@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:batch="http://www.springframework.org/schema/batch"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.2.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<description>Example job to get you started. It provides a skeleton for
+		a typical batch application.
+	</description>
+
+	<batch:job id="complexWriterJob">
+		<batch:step id="step1">
+			<batch:tasklet transaction-manager="transactionManager"
+				start-limit="100">
+				<batch:chunk reader="reader3" writer="xmlItemWriter"
+					commit-interval="2" />
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+	<bean id="xmlItemWriter" class="org.springframework.batch.item.xml.StaxEventItemWriter">
+		<property name="resource" value="file:C:\Dateiaustausch\Dateiaustausch.xml" />
+		<property name="marshaller" ref="dateiMarshaller" />
+		<property name="rootTagName" value="Datei" />
+		<property name="overwriteOutput" value="true" />
+		<property name="headerCallback" ref="headerCallback"/>
+	</bean>
+	
+	<bean id="headerCallback" class="de.steri.springbatch.xml.complexwriter.processing.CustomHeaderCallback"/>
+
+	<bean id="dateiMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="classesToBeBound">
+			<list>
+				<value>de.steri.springbatch.xml.domain.DateiType</value>
+				<value>de.steri.springbatch.xml.domain.PersonType</value>
+				<value>de.steri.springbatch.xml.domain.GeschaeftsPartnerType</value>
+			</list>
+		</property>
+
+		<!-- <property name="schema" value="file:C:\springsource\workspace\XML_Examples\src\main\java\de\steri\xml\jaxb\domain\Dateiaustausch.xsd"/> -->
+	</bean>
+
+</beans>

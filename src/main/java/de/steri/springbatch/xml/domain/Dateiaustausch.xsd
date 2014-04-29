@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema targetNamespace="http://www.steri.de/springbatch/xml/domain"
 	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.steri.de/springbatch/xml/domain">
-	<!-- <element name="person" type="PersonType"></element> -->
+	
 	<element name="dateiType">
 		<complexType id="DateiType">
+
 			<sequence>
-				<element name="header" type="tns:HeaderType" maxOccurs="1"
-					minOccurs="1"></element>
+				<element name="header" type="tns:HeaderType"
+					maxOccurs="1" minOccurs="1">
+				</element>
 				<choice>
-					<element name="personen" type="tns:PersonType" maxOccurs="unbounded"
+					<element name="person" type="tns:PersonType"
+						maxOccurs="unbounded" minOccurs="0">
+					</element>
+					<element name="geschaeftspartner"
+						type="tns:GeschaeftsPartnerType" maxOccurs="unbounded"
 						minOccurs="0">
-					</element>                    <element name="partner" type="tns:PartnerType" maxOccurs="unbounded" minOccurs="0"></element>
-                </choice>
-				<element name="footer" type="tns:FooterType" maxOccurs="1"
-					minOccurs="0"></element>
+					</element>
+				</choice>
+				<element name="footer" type="tns:FooterType"
+					maxOccurs="1" minOccurs="0">
+				</element>
 			</sequence>
+			<attribute name="erstellungsdatum" type="string"></attribute>
 		</complexType>
 	</element>
 	<complexType id="PersonType" name="PersonType">
@@ -45,7 +53,7 @@
 			<element name="erstellungsdatum" type="string"></element>
 		</sequence>
 	</complexType>
-	<complexType name="PartnerType">
+	<complexType name="GeschaeftsPartnerType">
 		<sequence>
 			<element name="name" type="string"></element>
 			<element name="adressen" type="tns:AdresseType"
