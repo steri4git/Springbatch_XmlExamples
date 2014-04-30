@@ -16,28 +16,28 @@ import de.steri.springbatch.xml.util.XmlObjectFactory;
 
 @Component("reader3")
 public class Reader3 implements ItemReader<Object> {
-	
+
 	XmlObjectFactory factory = new XmlObjectFactory();
 	List<Object> list = new ArrayList<Object>();
 	private Object[] input = new Object[500];
-	
+
 	private int index = 0;
-	
+
 	/**
 	 * Reads next record from input
 	 */
 	public Object read() throws Exception {
-		
+
 		System.out.println("READER 1 AUFFERUFEN");
 
 		if (index < input.length) {
 			return input[index++];
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
-	Reader3(){
+
+	Reader3() {
 		list.addAll(factory.createPersonTypeListe(100));
 		list.addAll(factory.createPartnerTypeListe(100));
 		input = list.toArray(new Object[0]);

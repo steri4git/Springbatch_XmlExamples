@@ -13,17 +13,19 @@
 		<batch:step id="step1">
 			<batch:tasklet transaction-manager="transactionManager"
 				start-limit="100">
-				<batch:chunk reader="reader3" writer="xmlItemWriter"
+				<batch:chunk reader="reader1" writer="xmlItemWriter"
 					commit-interval="2" />
 			</batch:tasklet>
 		</batch:step>
 	</batch:job>
-	<bean id="xmlItemWriter" class="org.springframework.batch.item.xml.StaxEventItemWriter">
+	<bean id="xmlItemWriter" class="de.steri.springbatch.xml.complexwriter.processing.CustomStaxEventItemWriter">
 		<property name="resource" value="file:C:\Dateiaustausch\Dateiaustausch.xml" />
 		<property name="marshaller" ref="dateiMarshaller" />
-		<property name="rootTagName" value="Datei" />
+		<property name="rootTagName" value="dateiType" />
 		<property name="overwriteOutput" value="true" />
+		<!--  
 		<property name="headerCallback" ref="headerCallback"/>
+		-->
 	</bean>
 	
 	<bean id="headerCallback" class="de.steri.springbatch.xml.complexwriter.processing.CustomHeaderCallback"/>

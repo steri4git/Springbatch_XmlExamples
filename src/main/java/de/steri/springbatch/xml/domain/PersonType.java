@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
     "vorname",
     "adressen"
 })
-@XmlRootElement(name = "personType")
+@XmlRootElement(name = "person")
 public class PersonType {
 
     @XmlElement(required = true)

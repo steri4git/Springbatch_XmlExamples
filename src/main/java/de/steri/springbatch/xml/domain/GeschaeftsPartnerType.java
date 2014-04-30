@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
     "name",
     "adressen"
 })
-@XmlRootElement(name = "geschaeftsPartnerType")
+@XmlRootElement(name = "geschaeftspartner")
 public class GeschaeftsPartnerType {
 
     @XmlElement(required = true)
