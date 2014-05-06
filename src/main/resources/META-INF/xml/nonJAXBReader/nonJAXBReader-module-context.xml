@@ -28,26 +28,16 @@
 
 	<bean id="xmlItemReader1"
 		class="de.steri.springbatch.xml.complexreader.processing.Sb3StaxEventItemReader">
-		<property name="fragmentRootElementNames" >
+		<property name="fragmentRootElementNames">
 			<list>
 				<value>person</value>
-				<value>geschaeftspartner</value>
 			</list>
 		</property>
 		<property name="resource" value="file:C:\Dateiaustausch\Dateiaustausch.xml" />
 		<property name="unmarshaller" ref="dateiMarshaller" />
 	</bean>
 
-	<bean id="dateiMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-		<property name="classesToBeBound">
-			<list>
-				<value>de.steri.springbatch.xml.domain.DateiType</value>
-				<value>de.steri.springbatch.xml.domain.PersonType</value>
-				<value>de.steri.springbatch.xml.domain.GeschaeftsPartnerType</value>
-			</list>
-		</property>
-		<property name="checkForXmlRootElement" value="true"></property>
-		<!-- <property name="schema" value="file:C:\springsource\workspace\XML_Examples\src\main\java\de\steri\xml\jaxb\domain\Dateiaustausch.xsd" 
-			/> -->
+	<bean id="dateiMarshaller" class="de.steri.springbatch.xml.nonjaxbreader.processing.CustomUnmarshaller">
+		
 	</bean>
 </beans>
