@@ -37,7 +37,7 @@
 		<property name="unmarshaller" ref="dateiMarshaller" />
 	</bean>
 
-	<bean id="dateiMarshaller" class="de.steri.springbatch.xml.nonjaxbreader.processing.CustomUnmarshaller">
+	<bean id="dateiMarshaller" class="de.steri.springbatch.xml.nonjaxbreader.processing.CustomValidatingUnmarshaller">
 		
 	</bean>
 </beans>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.steri.de/springbatch/xml/domain"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.steri.de/springbatch/xml/domain">
+	
+	<element name="dateiType">
+		<complexType id="DateiType">
+
+			<sequence>
+				<element name="header" type="tns:HeaderType"
+					maxOccurs="1" minOccurs="1">
+				</element>
+				<choice>
+					<element name="person" type="tns:person"
+						maxOccurs="unbounded" minOccurs="0">
+					</element>
+					<element name="geschaeftspartner"
+						type="tns:GeschaeftsPartnerType" maxOccurs="unbounded"
+						minOccurs="0">
+					</element>
+				</choice>
+				<element name="footer" type="tns:FooterType"
+					maxOccurs="1" minOccurs="0">
+				</element>
+			</sequence>
+			<attribute name="erstellungsdatum" type="string"></attribute>
+		</complexType>
+	</element>
+	<complexType id="person" name="person">
+		<sequence>
+			<element name="name" type="string"></element>
+			<element name="vorname" type="string"></element>
+			<element name="adressen" type="tns:AdresseType" maxOccurs="unbounded"
+				minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType id="AdresseType" name="AdresseType">
+		<sequence>
+			<element name="strasse" type="string"></element>
+			<element name="hausnummer" type="string"></element>
+			<element name="stadt" type="string"></element>
+			<element name="plz" type="string"></element>
+		</sequence>
+	</complexType>
+	<complexType name="HeaderType">
+		<sequence>
+			<element name="EmpfängerID" type="string"></element>
+			<element name="EmpfängerName" type="string"></element>			</sequence>
+	</complexType>
+	<complexType name="FooterType">
+		<sequence>
+			<element name="anzahlDatensätze" type="int"></element>
+			<element name="erstellungsdatum" type="string"></element>
+		</sequence>
+	</complexType>
+	<complexType name="GeschaeftsPartnerType">
+		<sequence>
+			<element name="name" type="string"></element>
+			<element name="adressen" type="tns:AdresseType"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<element name="person" type="tns:person"></element>
+</schema>
